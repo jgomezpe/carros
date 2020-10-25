@@ -82,12 +82,13 @@ public class Carrera {
 	vehiculo[3] = furgon;
 	
 	for( int i=0; i<50; i++ ) {
+	    System.out.println();
 	    for( int j=0; j<vehiculo.length; j++) {
 		int pos = vehiculo[j].posicion(i);
 		vehiculo[j].pintar(pos);
 	    }
 	    pausar();
-	    System.out.println("=====================================================================================");
+	    System.out.print("=====================================================================================");
 	}
     }
 }
