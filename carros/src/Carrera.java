@@ -62,7 +62,7 @@ public class Carrera {
     
     /**
      * Main program
-     * @param args Not used
+     * @param args Not used in this program
      */
     public static void main( String[] args ){
 	Automovil automovil = new Automovil(5, 1);
