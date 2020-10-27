@@ -38,60 +38,86 @@
  */
 package vehiculo;
 
+import ciudad.Posicion;
+
 /**
- * Class representing a PickUp
+ * Class representing a cargo car 
  * @author jgomez
  *
  */
-public class Platon extends Carga{
+public class Carga extends Vehiculo{
+    /**
+     * Load capability
+     */
+    protected int capacidad;
+    /**
+     * Carrying object
+     */
+    protected Object carga;
 
     /**
-     * Creates a pickup with the given number of passengers, speed and load capability
+     * Row in image for painting the load
+     */
+    protected int filaCarga;
+
+    /**
+     * Creates a carrying vehicle with the given the position, number of passengers, 
+     * and load capability
+     * @param position Position of the vehicle
      * @param pasajeros Number of passengers
-     * @param velocidad Speed of the Vehicle
      * @param peso Load capability
      */
-    public Platon(int pasajeros, double velocidad, int peso) {
-	super(pasajeros, velocidad, peso);
-    }
+   public Carga(Posicion posicion, int pasajeros, int peso) {
+	super(posicion, pasajeros);
+	this.capacidad = peso>5?5:peso;
+	this.carga = "___";
+   }
 
+   /**
+    * Computes the image associated to the carried object
+    */
+   protected void imagenCarga() {
+       String laCarga = imagen[filaCarga].charAt(0) +
+	       		this.carga.toString();
+       int n = 6-laCarga.length();
+       for( int i=0; i<n; i++ ) {
+	   laCarga += '_';
+       }
+       laCarga+="|__\\___";
+       imagen[filaCarga] = laCarga;   
+   } 
+   
     /**
      * Carries the given number, if possible
      * @param p Number to carry
      * @return <i>true</i> If the number can be carried, <i>false</i> otherwise
      */
-    @Override
     public boolean llevar( int p) {
-	boolean lolleva = super.llevar(p);
-	if( lolleva ) {
-	    String laCarga = this.carga.toString();
-	    String cargaInvertida = "";
-	    for(int i=laCarga.length()-1; i>=0; i--) {
-		cargaInvertida += laCarga.charAt(i);  
-	    }
-	    this.carga = cargaInvertida;
+	int k = 1;
+	for( int i=0; i<this.capacidad; i++) {
+	    k *=10;
 	}
-	return lolleva;
+	if( p < k ) {
+	    this.carga = p;
+	    imagenCarga();
+	    return true;
+	}else {
+	    return false;
+	}
     }
 
     /**
-     * Paints the vehicle at the given position
-     * @param posicion Position used to print the vehicle
-     */
-    @Override
-    public void pintar( int posicion ) {
-	espacios(posicion+4);
-	System.out.println("   __");
-	espacios(posicion+1);
-	String laCarga = this.carga.toString();
-	int n = 5-laCarga.length();
-	for( int i=0; i<n; i++ ) {
-	    laCarga += '_';
+     * Carries the given string, if possible
+     * @param p Number to carry
+     * @return <i>true</i> If the string can be carried, <i>false</i> otherwise
+     */    
+    public boolean llevar( String p ) {
+	if( p.length() <= this.capacidad ) {
+	    this.carga = p;
+	    imagenCarga();
+	    return true;
+	}else {
+	    return false;
 	}
-	System.out.println(laCarga+"|__\\___");
-	espacios(posicion);
-	System.out.println("|_   ___   __|");
-	espacios(posicion);
-	System.out.println("   O     O");
     }
 }

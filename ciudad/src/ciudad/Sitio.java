@@ -3,7 +3,7 @@
  *
  * <h3>License</h3>
  *
- * Copyright (c) 2019 by Jonatan Gomez-Perdomo. <br>
+ * Copyright (c) 2016 by Jonatan Gomez-Perdomo. <br>
  * All rights reserved. <br>
  *
  * <p>Redistribution and use in source and binary forms, with or without
@@ -36,62 +36,27 @@
  * (E-mail: <A HREF="mailto:jgomezpe@unal.edu.co">jgomezpe@unal.edu.co</A> )
  * @version 1.0
  */
-package vehiculo;
+package ciudad;
 
 /**
- * Class representing a PickUp
+ * Class representing a place in a city 
  * @author jgomez
  *
  */
-public class Platon extends Carga{
-
+public class Sitio extends Cosa{
     /**
-     * Creates a pickup with the given number of passengers, speed and load capability
-     * @param pasajeros Number of passengers
-     * @param velocidad Speed of the Vehicle
-     * @param peso Load capability
+     * Creates a plece at the given position
+     * @param posicion Position of the place
      */
-    public Platon(int pasajeros, double velocidad, int peso) {
-	super(pasajeros, velocidad, peso);
-    }
-
-    /**
-     * Carries the given number, if possible
-     * @param p Number to carry
-     * @return <i>true</i> If the number can be carried, <i>false</i> otherwise
-     */
-    @Override
-    public boolean llevar( int p) {
-	boolean lolleva = super.llevar(p);
-	if( lolleva ) {
-	    String laCarga = this.carga.toString();
-	    String cargaInvertida = "";
-	    for(int i=laCarga.length()-1; i>=0; i--) {
-		cargaInvertida += laCarga.charAt(i);  
-	    }
-	    this.carga = cargaInvertida;
-	}
-	return lolleva;
-    }
-
-    /**
-     * Paints the vehicle at the given position
-     * @param posicion Position used to print the vehicle
-     */
-    @Override
-    public void pintar( int posicion ) {
-	espacios(posicion+4);
-	System.out.println("   __");
-	espacios(posicion+1);
-	String laCarga = this.carga.toString();
-	int n = 5-laCarga.length();
-	for( int i=0; i<n; i++ ) {
-	    laCarga += '_';
-	}
-	System.out.println(laCarga+"|__\\___");
-	espacios(posicion);
-	System.out.println("|_   ___   __|");
-	espacios(posicion);
-	System.out.println("   O     O");
+    public Sitio(Posicion posicion) {
+	super(posicion);
+	imagen = new String[] {
+	    "     __________",	
+	    "    /          \\",	
+	    "   /            \\",	
+	    "   |            |",	
+	    "   |            |",	
+	    "   |____________|"	
+	};
     }
 }

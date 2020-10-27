@@ -3,7 +3,7 @@
  *
  * <h3>License</h3>
  *
- * Copyright (c) 2019 by Jonatan Gomez-Perdomo. <br>
+ * Copyright (c) 2016 by Jonatan Gomez-Perdomo. <br>
  * All rights reserved. <br>
  *
  * <p>Redistribution and use in source and binary forms, with or without
@@ -36,62 +36,79 @@
  * (E-mail: <A HREF="mailto:jgomezpe@unal.edu.co">jgomezpe@unal.edu.co</A> )
  * @version 1.0
  */
-package vehiculo;
+package ciudad;
+
+import vehiculo.Vehiculo;
 
 /**
- * Class representing a PickUp
+ * Class representing a city 
  * @author jgomez
  *
  */
-public class Platon extends Carga{
-
+public class Ciudad {
     /**
-     * Creates a pickup with the given number of passengers, speed and load capability
-     * @param pasajeros Number of passengers
-     * @param velocidad Speed of the Vehicle
-     * @param peso Load capability
+     * Set of vehicles in the city
      */
-    public Platon(int pasajeros, double velocidad, int peso) {
-	super(pasajeros, velocidad, peso);
-    }
-
+    protected Vehiculo[] vehiculo;
     /**
-     * Carries the given number, if possible
-     * @param p Number to carry
-     * @return <i>true</i> If the number can be carried, <i>false</i> otherwise
+     * Set of places in the city
      */
-    @Override
-    public boolean llevar( int p) {
-	boolean lolleva = super.llevar(p);
-	if( lolleva ) {
-	    String laCarga = this.carga.toString();
-	    String cargaInvertida = "";
-	    for(int i=laCarga.length()-1; i>=0; i--) {
-		cargaInvertida += laCarga.charAt(i);  
+    protected Sitio[] sitio;
+    /**
+     * Map of the city. Used for painting the city
+     */
+    protected char[][] mapa;
+    
+    /**
+     * Creates a city with the given vehicles and places
+     * @param vehiculo Set of vehicles in the city
+     * @param sitio Set of places in the city
+     */
+    public Ciudad( Vehiculo[] vehiculo, Sitio[] sitio ) {
+	this.vehiculo = vehiculo;
+	this.sitio = sitio;
+	mapa = new char[30][60];
+	for( int i=0; i<mapa.length; i++ ) {
+	    for( int j=0; j<mapa[i].length; j++ ) {
+		mapa[i][j] = ' ';
 	    }
-	    this.carga = cargaInvertida;
 	}
-	return lolleva;
     }
-
+    
     /**
-     * Paints the vehicle at the given position
-     * @param posicion Position used to print the vehicle
+     * Moves the vehicles in the city. Vehicles moves one square from left to right
+     * but can move up or down in a random fashion 
      */
-    @Override
-    public void pintar( int posicion ) {
-	espacios(posicion+4);
-	System.out.println("   __");
-	espacios(posicion+1);
-	String laCarga = this.carga.toString();
-	int n = 5-laCarga.length();
-	for( int i=0; i<n; i++ ) {
-	    laCarga += '_';
+    public void mover() {
+	for( int i=0; i<vehiculo.length; i++ ) {
+	    int f = (int)(Math.random()*3) - 1;
+	    int c = 1;
+	    vehiculo[i].mover(f, c);
 	}
-	System.out.println(laCarga+"|__\\___");
-	espacios(posicion);
-	System.out.println("|_   ___   __|");
-	espacios(posicion);
-	System.out.println("   O     O");
+    }
+    
+    /**
+     * Paints the set of vehicles and places in the map
+     */
+    public void pintar() {
+	for( int i=0; i<mapa.length; i++ ) {
+	    for( int j=0; j<mapa[i].length; j++ ) {
+		mapa[i][j] = ' ';
+	    }
+	}
+
+	for( int i=0; i<sitio.length; i++ ) {
+	    sitio[i].pintar(mapa);
+	}
+	for( int i=0; i<vehiculo.length; i++ ) {
+	    vehiculo[i].pintar(mapa);
+	}
+	
+	for( int i=0; i<mapa.length; i++ ) {
+	    System.out.println();
+	    for( int j=0; j<mapa[i].length; j++ ) {
+		System.out.print(mapa[i][j]);
+	    }
+	}
     }
 }

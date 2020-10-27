@@ -38,6 +38,8 @@
  */
 package vehiculo;
 
+import ciudad.Posicion;
+
 /**
  * Class representing a PickUp
  * @author jgomez
@@ -46,13 +48,20 @@ package vehiculo;
 public class Platon extends Carga{
 
     /**
-     * Creates a pickup with the given number of passengers, speed and load capability
+     * Creates a pickup with the given given position, number of passengers, and load capability
+     * @param position Position of the vehicle
      * @param pasajeros Number of passengers
-     * @param velocidad Speed of the Vehicle
      * @param peso Load capability
      */
-    public Platon(int pasajeros, double velocidad, int peso) {
-	super(pasajeros, velocidad, peso);
+    public Platon(Posicion posicion, int pasajeros, int peso) {
+	super(posicion, pasajeros, peso);
+	filaCarga = 1;
+	imagen = new String[] {
+		"       __",
+		" _____|__\\___",
+		"|_   ___   __|",
+		"   O     O"
+	};	
     }
 
     /**
@@ -70,28 +79,8 @@ public class Platon extends Carga{
 		cargaInvertida += laCarga.charAt(i);  
 	    }
 	    this.carga = cargaInvertida;
+	    imagenCarga();
 	}
 	return lolleva;
-    }
-
-    /**
-     * Paints the vehicle at the given position
-     * @param posicion Position used to print the vehicle
-     */
-    @Override
-    public void pintar( int posicion ) {
-	espacios(posicion+4);
-	System.out.println("   __");
-	espacios(posicion+1);
-	String laCarga = this.carga.toString();
-	int n = 5-laCarga.length();
-	for( int i=0; i<n; i++ ) {
-	    laCarga += '_';
-	}
-	System.out.println(laCarga+"|__\\___");
-	espacios(posicion);
-	System.out.println("|_   ___   __|");
-	espacios(posicion);
-	System.out.println("   O     O");
     }
 }

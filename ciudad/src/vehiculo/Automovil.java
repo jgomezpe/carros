@@ -38,60 +38,27 @@
  */
 package vehiculo;
 
+import ciudad.Posicion;
+
 /**
- * Class representing a PickUp
+ * Class representing a small car 
  * @author jgomez
  *
  */
-public class Platon extends Carga{
+public class Automovil extends Vehiculo{
 
     /**
-     * Creates a pickup with the given number of passengers, speed and load capability
+     * Creates a car with the given position and number of passengers
+     * @param position Position of the vehicle
      * @param pasajeros Number of passengers
-     * @param velocidad Speed of the Vehicle
-     * @param peso Load capability
      */
-    public Platon(int pasajeros, double velocidad, int peso) {
-	super(pasajeros, velocidad, peso);
-    }
-
-    /**
-     * Carries the given number, if possible
-     * @param p Number to carry
-     * @return <i>true</i> If the number can be carried, <i>false</i> otherwise
-     */
-    @Override
-    public boolean llevar( int p) {
-	boolean lolleva = super.llevar(p);
-	if( lolleva ) {
-	    String laCarga = this.carga.toString();
-	    String cargaInvertida = "";
-	    for(int i=laCarga.length()-1; i>=0; i--) {
-		cargaInvertida += laCarga.charAt(i);  
-	    }
-	    this.carga = cargaInvertida;
-	}
-	return lolleva;
-    }
-
-    /**
-     * Paints the vehicle at the given position
-     * @param posicion Position used to print the vehicle
-     */
-    @Override
-    public void pintar( int posicion ) {
-	espacios(posicion+4);
-	System.out.println("   __");
-	espacios(posicion+1);
-	String laCarga = this.carga.toString();
-	int n = 5-laCarga.length();
-	for( int i=0; i<n; i++ ) {
-	    laCarga += '_';
-	}
-	System.out.println(laCarga+"|__\\___");
-	espacios(posicion);
-	System.out.println("|_   ___   __|");
-	espacios(posicion);
-	System.out.println("   O     O");
-    }
+    public Automovil(Posicion posicion, int pasajeros) {
+	super(posicion, pasajeros);
+	imagen = new String[] {
+		    "    _____",	
+		    " __/__|__\\___",	
+		    "|_  _____  __|",	
+		    "   O      O"	
+		};	
+    }  
 }

@@ -38,60 +38,36 @@
  */
 package vehiculo;
 
+import ciudad.Cosa;
+import ciudad.Posicion;
+
 /**
- * Class representing a PickUp
+ * Abstract Class representing a Vehicle
  * @author jgomez
  *
  */
-public class Platon extends Carga{
-
+public class Vehiculo extends Cosa{
     /**
-     * Creates a pickup with the given number of passengers, speed and load capability
+     * Number of passengers 
+     */
+    protected int pasajeros;
+    
+    /**
+     * Creates a vehicle with the given given position and number of passengers
+     * @param position Position of the vehicle
      * @param pasajeros Number of passengers
-     * @param velocidad Speed of the Vehicle
-     * @param peso Load capability
      */
-    public Platon(int pasajeros, double velocidad, int peso) {
-	super(pasajeros, velocidad, peso);
+    public Vehiculo(Posicion posicion, int pasajeros) {
+	super( posicion ); 
+	this.pasajeros = pasajeros;
     }
-
+    
     /**
-     * Carries the given number, if possible
-     * @param p Number to carry
-     * @return <i>true</i> If the number can be carried, <i>false</i> otherwise
+     * Moves the vehicle the given amount of rows and columns
+     * @param cambio_fila Rows change 
+     * @return cambio_columna Columns change
      */
-    @Override
-    public boolean llevar( int p) {
-	boolean lolleva = super.llevar(p);
-	if( lolleva ) {
-	    String laCarga = this.carga.toString();
-	    String cargaInvertida = "";
-	    for(int i=laCarga.length()-1; i>=0; i--) {
-		cargaInvertida += laCarga.charAt(i);  
-	    }
-	    this.carga = cargaInvertida;
-	}
-	return lolleva;
-    }
-
-    /**
-     * Paints the vehicle at the given position
-     * @param posicion Position used to print the vehicle
-     */
-    @Override
-    public void pintar( int posicion ) {
-	espacios(posicion+4);
-	System.out.println("   __");
-	espacios(posicion+1);
-	String laCarga = this.carga.toString();
-	int n = 5-laCarga.length();
-	for( int i=0; i<n; i++ ) {
-	    laCarga += '_';
-	}
-	System.out.println(laCarga+"|__\\___");
-	espacios(posicion);
-	System.out.println("|_   ___   __|");
-	espacios(posicion);
-	System.out.println("   O     O");
-    }
+    public void mover( int cambio_fila, int cambio_columna ) {
+	this.posicion.cambiar(cambio_fila, cambio_columna);
+    }    
 }

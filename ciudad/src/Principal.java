@@ -3,7 +3,7 @@
  *
  * <h3>License</h3>
  *
- * Copyright (c) 2019 by Jonatan Gomez-Perdomo. <br>
+ * Copyright (c) 2016 by Jonatan Gomez-Perdomo. <br>
  * All rights reserved. <br>
  *
  * <p>Redistribution and use in source and binary forms, with or without
@@ -36,62 +36,64 @@
  * (E-mail: <A HREF="mailto:jgomezpe@unal.edu.co">jgomezpe@unal.edu.co</A> )
  * @version 1.0
  */
-package vehiculo;
+import ciudad.Ciudad;
+import ciudad.Posicion;
+import ciudad.Sitio;
+import vehiculo.Automovil;
+import vehiculo.Deportivo;
+import vehiculo.Furgon;
+import vehiculo.Platon;
+import vehiculo.Vehiculo;
 
 /**
- * Class representing a PickUp
+ * Main class
  * @author jgomez
  *
  */
-public class Platon extends Carga{
-
+public class Principal {
     /**
-     * Creates a pickup with the given number of passengers, speed and load capability
-     * @param pasajeros Number of passengers
-     * @param velocidad Speed of the Vehicle
-     * @param peso Load capability
+     * Stops the program 100 milliseconds
      */
-    public Platon(int pasajeros, double velocidad, int peso) {
-	super(pasajeros, velocidad, peso);
+    public static void pausar() {
+	    try {
+		Thread.sleep(100);
+	    } catch (InterruptedException e) {
+		e.printStackTrace();
+	    }	
     }
 
     /**
-     * Carries the given number, if possible
-     * @param p Number to carry
-     * @return <i>true</i> If the number can be carried, <i>false</i> otherwise
+     * Main program
+     * @param args Not used in this program
      */
-    @Override
-    public boolean llevar( int p) {
-	boolean lolleva = super.llevar(p);
-	if( lolleva ) {
-	    String laCarga = this.carga.toString();
-	    String cargaInvertida = "";
-	    for(int i=laCarga.length()-1; i>=0; i--) {
-		cargaInvertida += laCarga.charAt(i);  
-	    }
-	    this.carga = cargaInvertida;
+    public static void main(String[] args) {
+	Automovil automovil = new Automovil( new Posicion(5, 10), 5);
+	Deportivo deportivo = new Deportivo( new Posicion(15, 40), 5);
+	Platon camioneta = new Platon( new Posicion(20, 2), 3, 4);
+	camioneta.llevar(1234);
+	Furgon furgon = new Furgon( new Posicion(2, 50), 3, 4);
+	furgon.llevar("AA");
+	
+	Vehiculo[] vehiculo = new Vehiculo[4];
+	vehiculo[0] = automovil;
+	vehiculo[1] = camioneta;
+	vehiculo[2] = deportivo;
+	vehiculo[3] = furgon;
+	
+	Sitio[] sitio = new Sitio[2];
+	for( int i=0; i<2; i++ ) {
+	    int f = (int)(Math.random()*20) + 2;
+	    int c = (int)(Math.random()*45) + 1;
+	    sitio[i] = new Sitio( new Posicion(f,c) );
 	}
-	return lolleva;
-    }
 
-    /**
-     * Paints the vehicle at the given position
-     * @param posicion Position used to print the vehicle
-     */
-    @Override
-    public void pintar( int posicion ) {
-	espacios(posicion+4);
-	System.out.println("   __");
-	espacios(posicion+1);
-	String laCarga = this.carga.toString();
-	int n = 5-laCarga.length();
-	for( int i=0; i<n; i++ ) {
-	    laCarga += '_';
+	Ciudad ciudad = new Ciudad(vehiculo, sitio);
+	for( int i=0; i<10; i++) {
+	    ciudad.mover();
+	    ciudad.pintar();
+	    System.out.println();
+	    System.out.print("**************************************************");
+	    pausar();
 	}
-	System.out.println(laCarga+"|__\\___");
-	espacios(posicion);
-	System.out.println("|_   ___   __|");
-	espacios(posicion);
-	System.out.println("   O     O");
     }
 }
