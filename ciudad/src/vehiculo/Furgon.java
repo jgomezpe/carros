@@ -48,7 +48,7 @@ import ciudad.Posicion;
 public class Furgon extends Carga{
     /**
      * Creates a van vehicle with the given position, number of passengers, and load capability
-     * @param position Position of the vehicle
+     * @param posicion Position of the vehicle
      * @param pasajeros Number of passengers
      * @param peso Load capability
      */

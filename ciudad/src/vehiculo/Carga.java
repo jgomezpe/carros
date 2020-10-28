@@ -63,7 +63,7 @@ public class Carga extends Vehiculo{
     /**
      * Creates a carrying vehicle with the given the position, number of passengers, 
      * and load capability
-     * @param position Position of the vehicle
+     * @param posicion Position of the vehicle
      * @param pasajeros Number of passengers
      * @param peso Load capability
      */

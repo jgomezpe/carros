@@ -54,7 +54,7 @@ public class Vehiculo extends Cosa{
     
     /**
      * Creates a vehicle with the given given position and number of passengers
-     * @param position Position of the vehicle
+     * @param posicion Position of the vehicle
      * @param pasajeros Number of passengers
      */
     public Vehiculo(Posicion posicion, int pasajeros) {
@@ -65,7 +65,7 @@ public class Vehiculo extends Cosa{
     /**
      * Moves the vehicle the given amount of rows and columns
      * @param cambio_fila Rows change 
-     * @return cambio_columna Columns change
+     * @param cambio_columna Columns change
      */
     public void mover( int cambio_fila, int cambio_columna ) {
 	this.posicion.cambiar(cambio_fila, cambio_columna);

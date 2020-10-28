@@ -49,7 +49,7 @@ public class Automovil extends Vehiculo{
 
     /**
      * Creates a car with the given position and number of passengers
-     * @param position Position of the vehicle
+     * @param posicion Position of the vehicle
      * @param pasajeros Number of passengers
      */
     public Automovil(Posicion posicion, int pasajeros) {
