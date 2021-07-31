@@ -3,7 +3,7 @@
  *
  * <h3>License</h3>
  *
- * Copyright (c) 2016 by Jonatan Gomez-Perdomo. <br>
+ * Copyright (c) 2019 by Jonatan Gomez-Perdomo. <br>
  * All rights reserved. <br>
  *
  * <p>Redistribution and use in source and binary forms, with or without
@@ -36,27 +36,38 @@
  * (E-mail: <A HREF="mailto:jgomezpe@unal.edu.co">jgomezpe@unal.edu.co</A> )
  * @version 1.0
  */
-package ciudad;
+package vehiculo;
+
+import ciudad.Cosa;
+import ciudad.Posicion;
 
 /**
- * Class representing a place in a city 
+ * Abstract Class representing a Vehicle
  * @author jgomez
  *
  */
-public class Sitio extends Cosa{
+public class Vehiculo extends Cosa{
     /**
-     * Creates a place at the given position
-     * @param posicion Position of the place
+     * Number of passengers 
      */
-    public Sitio(Posicion posicion) {
-	super(posicion);
-	imagen = new String[] {
-	    "     __________",	
-	    "    /          \\",	
-	    "   /            \\",	
-	    "   |            |",	
-	    "   |            |",	
-	    "   |____________|"	
-	};
+    protected int pasajeros;
+    
+    /**
+     * Creates a vehicle with the given given position and number of passengers
+     * @param posicion Position of the vehicle
+     * @param pasajeros Number of passengers
+     */
+    public Vehiculo(Posicion posicion, int pasajeros) {
+	super( posicion ); 
+	this.pasajeros = pasajeros;
     }
+    
+    /**
+     * Moves the vehicle the given amount of rows and columns
+     * @param cambio_fila Rows change 
+     * @param cambio_columna Columns change
+     */
+    public void mover( int cambio_fila, int cambio_columna ) {
+	this.posicion.cambiar(cambio_fila, cambio_columna);
+    }    
 }

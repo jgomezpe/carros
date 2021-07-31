@@ -3,7 +3,7 @@
  *
  * <h3>License</h3>
  *
- * Copyright (c) 2016 by Jonatan Gomez-Perdomo. <br>
+ * Copyright (c) 2019 by Jonatan Gomez-Perdomo. <br>
  * All rights reserved. <br>
  *
  * <p>Redistribution and use in source and binary forms, with or without
@@ -36,27 +36,29 @@
  * (E-mail: <A HREF="mailto:jgomezpe@unal.edu.co">jgomezpe@unal.edu.co</A> )
  * @version 1.0
  */
-package ciudad;
+package vehiculo;
+
+import ciudad.Posicion;
 
 /**
- * Class representing a place in a city 
+ * Class representing a SUV
  * @author jgomez
  *
  */
-public class Sitio extends Cosa{
+public class Deportivo extends Vehiculo{
+
     /**
-     * Creates a place at the given position
-     * @param posicion Position of the place
+     * Creates a SUV vehicle with the given position and number of passengers
+     * @param posicion Position of the vehicle
+     * @param pasajeros Number of passengers
      */
-    public Sitio(Posicion posicion) {
-	super(posicion);
+   public Deportivo(Posicion posicion, int pasajeros) {
+	super(posicion, pasajeros);
 	imagen = new String[] {
-	    "     __________",	
-	    "    /          \\",	
-	    "   /            \\",	
-	    "   |            |",	
-	    "   |            |",	
-	    "   |____________|"	
-	};
-    }
+		" ________",
+		"/_|__|___\\___",
+		"|_  _____  __|",
+		"   0      0"
+	};	
+   }
 }

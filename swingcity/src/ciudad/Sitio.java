@@ -45,18 +45,19 @@ package ciudad;
  */
 public class Sitio extends Cosa{
     /**
-     * Creates a place at the given position
+     * Creates a plece at the given position
      * @param posicion Position of the place
      */
     public Sitio(Posicion posicion) {
 	super(posicion);
 	imagen = new String[] {
-	    "     __________",	
-	    "    /          \\",	
-	    "   /            \\",	
-	    "   |            |",	
-	    "   |            |",	
-	    "   |____________|"	
+            "           _ _ ",
+	    "     ______| |_",	
+	    "    / ~~~~~~~~ \\",	
+	    "   / ~~~~~~~~~~ \\",	
+	    "   | []  __  [] |",	
+	    "   |    | .|    |",	
+	    "   |____|__|____|"	
 	};
     }
 }

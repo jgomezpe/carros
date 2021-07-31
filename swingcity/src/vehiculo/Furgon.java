@@ -3,7 +3,7 @@
  *
  * <h3>License</h3>
  *
- * Copyright (c) 2016 by Jonatan Gomez-Perdomo. <br>
+ * Copyright (c) 2019 by Jonatan Gomez-Perdomo. <br>
  * All rights reserved. <br>
  *
  * <p>Redistribution and use in source and binary forms, with or without
@@ -36,27 +36,31 @@
  * (E-mail: <A HREF="mailto:jgomezpe@unal.edu.co">jgomezpe@unal.edu.co</A> )
  * @version 1.0
  */
-package ciudad;
+package vehiculo;
+
+import ciudad.Posicion;
 
 /**
- * Class representing a place in a city 
+ * Class representing a van
  * @author jgomez
  *
  */
-public class Sitio extends Cosa{
+public class Furgon extends Carga{
     /**
-     * Creates a place at the given position
-     * @param posicion Position of the place
+     * Creates a van vehicle with the given position, number of passengers, and load capability
+     * @param posicion Position of the vehicle
+     * @param pasajeros Number of passengers
+     * @param peso Load capability
      */
-    public Sitio(Posicion posicion) {
-	super(posicion);
+    public Furgon(Posicion posicion, int pasajeros, int peso) {
+	super(posicion, pasajeros, peso);
+	filaCarga = 2;
 	imagen = new String[] {
-	    "     __________",	
-	    "    /          \\",	
-	    "   /            \\",	
-	    "   |            |",	
-	    "   |            |",	
-	    "   |____________|"	
-	};
+		" _____",
+		"|     |__",
+		"|_____|__\\___",
+		"|_   ___   __|",
+		"   O     O"
+	};	
     }
 }

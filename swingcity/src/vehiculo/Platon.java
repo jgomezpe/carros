@@ -3,7 +3,7 @@
  *
  * <h3>License</h3>
  *
- * Copyright (c) 2016 by Jonatan Gomez-Perdomo. <br>
+ * Copyright (c) 2019 by Jonatan Gomez-Perdomo. <br>
  * All rights reserved. <br>
  *
  * <p>Redistribution and use in source and binary forms, with or without
@@ -36,27 +36,51 @@
  * (E-mail: <A HREF="mailto:jgomezpe@unal.edu.co">jgomezpe@unal.edu.co</A> )
  * @version 1.0
  */
-package ciudad;
+package vehiculo;
+
+import ciudad.Posicion;
 
 /**
- * Class representing a place in a city 
+ * Class representing a PickUp
  * @author jgomez
  *
  */
-public class Sitio extends Cosa{
+public class Platon extends Carga{
+
     /**
-     * Creates a place at the given position
-     * @param posicion Position of the place
+     * Creates a pickup with the given given position, number of passengers, and load capability
+     * @param posicion Position of the vehicle
+     * @param pasajeros Number of passengers
+     * @param peso Load capability
      */
-    public Sitio(Posicion posicion) {
-	super(posicion);
+    public Platon(Posicion posicion, int pasajeros, int peso) {
+	super(posicion, pasajeros, peso);
+	filaCarga = 1;
 	imagen = new String[] {
-	    "     __________",	
-	    "    /          \\",	
-	    "   /            \\",	
-	    "   |            |",	
-	    "   |            |",	
-	    "   |____________|"	
-	};
+		"       __",
+		" _____|__\\___",
+		"|_   ___   __|",
+		"   O     O"
+	};	
+    }
+
+    /**
+     * Carries the given number, if possible
+     * @param p Number to carry
+     * @return <i>true</i> If the number can be carried, <i>false</i> otherwise
+     */
+    @Override
+    public boolean llevar( int p) {
+	boolean lolleva = super.llevar(p);
+	if( lolleva ) {
+	    String laCarga = this.carga.toString();
+	    String cargaInvertida = "";
+	    for(int i=laCarga.length()-1; i>=0; i--) {
+		cargaInvertida += laCarga.charAt(i);  
+	    }
+	    this.carga = cargaInvertida;
+	    imagenCarga();
+	}
+	return lolleva;
     }
 }
